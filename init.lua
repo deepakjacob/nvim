@@ -1,0 +1,5 @@
+require('plugins')
+require('options')
+require('nvim-tree-config')
+require('treesitter-config')
+vim.cmd('colorscheme nord')
