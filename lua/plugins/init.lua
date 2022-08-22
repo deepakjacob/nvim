@@ -29,4 +29,5 @@ return require('packer').startup(function(use)
   use {'hrsh7th/cmp-vsnip'}
   use {'hrsh7th/vim-vsnip'}
   use {'onsails/lspkind-nvim'}
+  use {"akinsho/toggleterm.nvim"}
 end)

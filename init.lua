@@ -6,6 +6,6 @@ require('treesitter-config')
 require('autopairs-config')
 require('whichkey-config')
 require('telescope-config')
-require('cmp-config')
+require('lsp')
 vim.cmd('colorscheme nord')
 
