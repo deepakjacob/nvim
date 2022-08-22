@@ -1,26 +1,40 @@
-return require('packer').startup(function(use)
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({
+    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path
+  })
+  vim.api.nvim_command('packadd packer.nvim')
+end
+
+return require('packer').startup({
+  function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  use 'shaunsingh/nord.nvim'
-  use {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate"}
+  use { 'rose-pine/neovim', config = "vim.cmd('colorscheme rose-pine')" }
+  use {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", event = "BufWinEnter", config = "require('treesitter-config')" }
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icons
     },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    tag = 'nightly', -- optional, updated every week. (see issue #1193)
+    cmd = ":NvimTreeToggle",
+    config = "require('nvim-tree-config')"
   }
-  use { 'windwp/nvim-ts-autotag' }
-  use { 'p00f/nvim-ts-rainbow' }
-  use { 'windwp/nvim-autopairs' }
+  use { 'windwp/nvim-ts-autotag', event = "InsertEnter", after = "nvim-treesitter" }
+  use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" }
+  use { 'windwp/nvim-autopairs', config = "require('autopairs-config')", after = "nvim-cmp" }
+  use { 'folke/which-key.nvim', event = "BufWinEnter", config = "require('whichkey-config')" }
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { { 'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim',
+    requires = { { 'nvim-lua/plenary.nvim' } },
+    cmd = "Telescope",
+    config = "require('telescope-config')"
   }
-  use { 'folke/which-key.nvim' }
-  use { 'neovim/nvim-lspconfig'}
-  use {'hrsh7th/cmp-nvim-lsp'}
-  use {'hrsh7th/cmp-buffer'}
+  use { 'neovim/nvim-lspconfig', config = "require('lsp')" }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
   use {'hrsh7th/cmp-path'}
   use {'hrsh7th/cmp-cmdline'}
   use {'hrsh7th/nvim-cmp'}
@@ -30,4 +44,16 @@ return require('packer').startup(function(use)
   use {'hrsh7th/vim-vsnip'}
   use {'onsails/lspkind-nvim'}
   use {"akinsho/toggleterm.nvim"}
-end)
+  use { 'glepnir/lspsaga.nvim', branch = "main", config = "require('lspsaga-config')" }
+  use { 'williamboman/nvim-lsp-installer' }
+
+end,
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end
+    }
+  }
+})
+

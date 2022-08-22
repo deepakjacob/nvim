@@ -1,11 +1,4 @@
 require('plugins')
 require('keybindings')
 require('options')
-require('nvim-tree-config')
-require('treesitter-config')
-require('autopairs-config')
-require('whichkey-config')
-require('telescope-config')
-require('lsp')
-vim.cmd('colorscheme nord')
 
