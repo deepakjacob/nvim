@@ -11,7 +11,8 @@ return require('packer').startup({
   function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-    use { 'rose-pine/neovim', config = "vim.cmd('colorscheme rose-pine')" }
+    -- use { 'rose-pine/neovim', config = "vim.cmd('colorscheme rose-pine')" }
+    use { 'Mofiqul/vscode.nvim', config = "vim.cmd('colorscheme vscode')" }
     use {
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
