@@ -33,7 +33,7 @@ return require('packer').startup({
       config = "require('nvim-tree-config')"
     }
     use { 'windwp/nvim-ts-autotag', event = "InsertEnter", after = "nvim-treesitter" }
-    use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" }
+    -- use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" }
     use { 'windwp/nvim-autopairs', config = "require('autopairs-config')", after = "nvim-cmp" }
     use { 'folke/which-key.nvim', event = "BufWinEnter", config = "require('whichkey-config')" }
     use {

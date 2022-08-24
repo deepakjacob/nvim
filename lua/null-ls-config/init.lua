@@ -6,8 +6,8 @@ local code_actions = null_ls.builtins.code_actions
 null_ls.setup({
   sources = {
     code_actions.gitsigns,
-    formatting.prettier, formatting.black, formatting.gofmt, formatting.shfmt,
-    formatting.clang_format, formatting.cmake_format, formatting.dart_format,
+    formatting.fixjson,
+    formatting.prettier, 
     formatting.lua_format.with({
       extra_args = {
         '--no-keep-simple-function-one-line', '--no-break-after-operator', '--column-limit=100',
@@ -19,6 +19,7 @@ null_ls.setup({
     if client.resolved_capabilities.document_formatting then
       vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
     end
+   if client.resolved_capabilities.document_highlight then
     vim.cmd [[
       augroup document_highlight
         autocmd! * <buffer>
@@ -26,5 +27,6 @@ null_ls.setup({
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
     ]]
+  end
   end
 })
