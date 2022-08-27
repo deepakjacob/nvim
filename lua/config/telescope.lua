@@ -152,20 +152,9 @@ function M.setup()
 
   require("neoclip").setup() -- https://github.com/AckslD/nvim-neoclip.lua/issues/5
 
-  telescope.load_extension "fzf"
-  telescope.load_extension "project" -- telescope-project.nvim
-  telescope.load_extension "repo"
   telescope.load_extension "file_browser"
-  telescope.load_extension "projects" -- project.nvim
-  telescope.load_extension "dap"
-  telescope.load_extension "frecency"
   telescope.load_extension "neoclip"
-  telescope.load_extension "smart_history"
-  telescope.load_extension "arecibo"
-  telescope.load_extension "media_files"
-  telescope.load_extension "bookmarks"
   telescope.load_extension "aerial"
-  telescope.load_extension "gh"
   telescope.load_extension "zoxide"
   telescope.load_extension "cder"
   -- telescope.load_extension "ui-select"

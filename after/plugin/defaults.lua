@@ -8,7 +8,6 @@ local opt = vim.opt
 vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
 g.mapleader = " "
 g.maplocalleader = ","
-g.vimsyn_embed = "lPr" -- Syntax embedding for Lua, Python and Ruby
 
 opt.termguicolors = true -- Enable colors in terminal
 opt.hlsearch = true --Set highlight on search
@@ -78,19 +77,6 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldlevelstart = -1
 -- opt.foldenable = true
 
--- Copilot
--- cmd [[
---     imap <silent><script><expr> <C-s> copilot#Accept("\<CR>")
---     let g:copilot_no_tab_map = v:true
--- ]]
-
--- GUI
-opt.guifont = "Fira_Code:h14"
-
-if g.neovide then
-  g.neovide_transparency = 0.9
-  g.neovide_fullscreen = true
-end
 
 -- Load filetype.lua
 g.do_filetype_lua = 1

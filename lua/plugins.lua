@@ -53,17 +53,7 @@ function M.setup()
 
     -- Load only when require
     use { "nvim-lua/plenary.nvim", module = "plenary" }
-
-    -- Notification
-    use {
-      "rcarriga/nvim-notify",
-      event = "BufReadPre",
-      config = function()
-        require("config.notify").setup()
-      end,
-      disable = false,
-    }
-   
+    
     -- Colorscheme
    
     use {
@@ -269,25 +259,10 @@ function M.setup()
       wants = {
         "plenary.nvim",
         "popup.nvim",
-        "telescope-fzf-native.nvim",
-        "telescope-repo.nvim",
-        "telescope-file-browser.nvim",
         "trouble.nvim",
-        "telescope-frecency.nvim",
-        "telescope-arecibo.nvim",
-        "telescope-zoxide",
-        "cder.nvim",
-        "aerial.nvim",
       },
       requires = {
         "nvim-lua/popup.nvim",
-        "nvim-lua/plenary.nvim",
-        "cljoly/telescope-repo.nvim",
-        "nvim-telescope/telescope-file-browser.nvim",
-   
-        "dhruvmanila/telescope-bookmarks.nvim",
-        "jvgrootveld/telescope-zoxide",
-        "Zane-/cder.nvim",
         "nvim-telescope/telescope-symbols.nvim",
       },
     }
@@ -543,16 +518,6 @@ function M.setup()
       -- requires = { "stevearc/dressing.nvim" },
     }
 
-    -- Harpoon
-    use {
-      "ThePrimeagen/harpoon",
-      keys = { [[<leader>j]] },
-      module = { "harpoon", "harpoon.cmd-ui", "harpoon.mark", "harpoon.ui", "harpoon.term" },
-      wants = { "telescope.nvim" },
-      config = function()
-        require("config.harpoon").setup()
-      end,
-    }
 
 
     -- Performance

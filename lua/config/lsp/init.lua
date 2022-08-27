@@ -100,7 +100,7 @@ local servers = {
   -- tailwindcss = {},
   yamlls = {
     schemastore = {
-      enable = true,
+      enable = false,
     },
     settings = {
       yaml = {
@@ -157,20 +157,6 @@ function M.on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
   end
 
-  -- sqls
-  if client.name == "sqls" then
-    require("sqls").on_attach(client, bufnr)
-  end
-
-  -- Configure for jdtls
-  if client.name == "jdt.ls" then
-    require("jdtls").setup_dap { hotcodereplace = "auto" }
-    require("jdtls.dap").setup_dap_main_class_configs()
-    vim.lsp.codelens.refresh()
-  end
-
-  -- aerial.nvim
-  require("aerial").on_attach(client, bufnr)
 
   -- nvim-navic
   if client.server_capabilities.documentSymbolProvider then
