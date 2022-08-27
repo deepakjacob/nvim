@@ -164,6 +164,29 @@ function M.setup()
         require("nvim-gps").setup()
       end,
     }
+		
+		use { "tpope/vim-vinegar" }
+		use {
+			"kyazdani42/nvim-tree.lua",
+			requires = {
+				"kyazdani42/nvim-web-devicons",
+			},
+			cmd = { "NvimTreeToggle", "NvimTreeClose" },
+			config = function()
+				require("config.nvimtree").setup()
+			end,
+		}
+		 -- Buffer line
+    use {
+      "akinsho/nvim-bufferline.lua",
+      event = "BufReadPre",
+      wants = "nvim-web-devicons",
+      config = function()
+        require("config.bufferline").setup()
+      end,
+    }
+
+		use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
 
     -- Bootstrap Neovim
     if packer_bootstrap then

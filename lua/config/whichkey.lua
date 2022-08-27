@@ -23,6 +23,10 @@ function M.setup()
     ["w"] = { "<cmd>update!<CR>", "Save" },
     ["q"] = { "<cmd>q!<CR>", "Quit" },
 
+		f = {
+			e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+		},
+
     b = {
       name = "Buffer",
       c = { "<Cmd>bd!<Cr>", "Close current buffer" },
