@@ -109,6 +109,11 @@ function M.setup()
       end,
     }
 
+		use { "andymass/vim-matchup", event = "CursorMoved" }
+    use { "wellle/targets.vim", event = "CursorMoved" }
+    use { "unblevable/quick-scope", event = "CursorMoved", disable = false }
+    use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
+
     -- Easy hopping
     use {
       "phaazon/hop.nvim",
@@ -151,10 +156,15 @@ function M.setup()
     -- Treesitter
     use {
       "nvim-treesitter/nvim-treesitter",
+			opt = true,
+			event = "BufRead",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
       end,
+			requires = {
+				{ "nvim-treesitter/nvim-treesitter-textobjects" },
+			}
     }
     use {
       "SmiteshP/nvim-gps",
@@ -187,7 +197,93 @@ function M.setup()
     }
 
 		use { "nvim-telescope/telescope.nvim", module = "telescope", as = "telescope" }
+		 
+    -- Completion
+    use {
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+      event = "InsertEnter",
+      opt = true,
+      run = ":COQdeps",
+      config = function()
+        require("config.coq").setup()
+      end,
+      requires = {
+        { "ms-jpq/coq.artifacts", branch = "artifacts" },
+        { "ms-jpq/coq.thirdparty", branch = "3p", module = "coq_3p" },
+      },
+      disable = true,
+    }
 
+    use {
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      opt = true,
+      config = function()
+        require("config.cmp").setup()
+      end,
+      requires = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "ray-x/cmp-treesitter",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-calc",
+        "f3fora/cmp-spell",
+        "hrsh7th/cmp-emoji",
+        "rafamadriz/friendly-snippets",
+				'hrsh7th/cmp-vsnip',
+				'hrsh7th/vim-vsnip',
+				'hrsh7th/cmp-nvim-lsp',
+        disable = false,
+      },
+    }
+
+		use { 'onsails/lspkind-nvim' }
+		
+	  -- Auto pairs
+    use {
+      "windwp/nvim-autopairs",
+      wants = "nvim-treesitter",
+      module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
+      config = function()
+        require("config.autopairs").setup()
+      end,
+    }
+
+		-- Auto tag
+    use {
+      "windwp/nvim-ts-autotag",
+      wants = "nvim-treesitter",
+      event = "InsertEnter",
+      config = function()
+        require("nvim-ts-autotag").setup { enable = true }
+      end,
+    }
+
+    -- End wise
+    use {
+      "RRethy/nvim-treesitter-endwise",
+      wants = "nvim-treesitter",
+      event = "InsertEnter",
+      disable = false,
+    }
+
+    -- LSP
+    use {
+      "neovim/nvim-lspconfig",
+      opt = true,
+      event = "BufReadPre",
+      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },  -- for nvim-cmp
+      wants = { "nvim-lsp-installer", "lsp_signature.nvim", "coq_nvim" },  -- for coq.nvim
+      config = function()
+        require("config.lsp").setup()
+      end,
+      requires = {
+        "williamboman/nvim-lsp-installer",
+        "ray-x/lsp_signature.nvim",
+      },
+    }
     -- Bootstrap Neovim
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
