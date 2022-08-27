@@ -63,22 +63,9 @@ function M.setup()
       end,
       disable = false,
     }
-    use {
-      "simrat39/desktop-notify.nvim",
-      config = function()
-        require("desktop-notify").override_vim_notify()
-      end,
-      disable = true,
-    }
-
+   
     -- Colorscheme
-    use {
-      "folke/tokyonight.nvim",
-      config = function()
-        vim.cmd "colorscheme tokyonight"
-      end,
-      disable = true,
-    }
+   
     use {
       "sainnhe/everforest",
       config = function()
@@ -87,24 +74,7 @@ function M.setup()
       end,
       disable = false,
     }
-    use {
-      "projekt0n/github-nvim-theme",
-      disable = true,
-    }
-    use {
-      "sainnhe/gruvbox-material",
-      config = function()
-        vim.cmd "colorscheme gruvbox-material"
-      end,
-      disable = true,
-    }
-    use {
-      "arcticicestudio/nord-vim",
-      config = function()
-        vim.cmd "colorscheme nord"
-      end,
-      disable = true,
-    }
+    
     use {
       "norcalli/nvim-colorizer.lua",
       cmd = "ColorizerToggle",
@@ -178,18 +148,6 @@ function M.setup()
       end,
       disable = false,
     }
-    use { "tpope/vim-commentary", keys = { "gc", "gcc", "gbc" }, disable = true }
-
-    -- Better surround
-    use { "tpope/vim-surround", event = "BufReadPre" }
-    use {
-      "Matt-A-Bennett/vim-surround-funk",
-      event = "BufReadPre",
-      config = function()
-        require("config.surroundfunk").setup()
-      end,
-      disable = true,
-    }
 
     -- Motions
     use { "andymass/vim-matchup", event = "CursorMoved" }
@@ -234,45 +192,10 @@ function M.setup()
         }
       end,
     }
-    use {
-      "karb94/neoscroll.nvim",
-      event = "BufReadPre",
-      config = function()
-        require("config.neoscroll").setup()
-      end,
-      disable = true,
-    }
-    use { "google/vim-searchindex", event = "BufReadPre" }
-    use { "tyru/open-browser.vim", event = "BufReadPre" }
-    use {
-      "bennypowers/nvim-regexplainer",
-      config = function()
-        require("regexplainer").setup()
-      end,
-      requires = {
-        "nvim-treesitter/nvim-treesitter",
-        "MunifTanjim/nui.nvim",
-      },
-      disable = true,
-    }
-    use {
-      "Djancyp/regex.nvim",
-      config = function()
-        require("regex-nvim").Setup()
-      end,
-      disable = true,
-    }
+    
+   
 
 
-    -- Jumps
-    use {
-      "phaazon/hop.nvim",
-      cmd = { "HopWord", "HopChar1" },
-      config = function()
-        require("hop").setup {}
-      end,
-      disable = true,
-    }
     use {
       "ggandor/leap.nvim",
       keys = { "s", "S", "f", "F", "t", "T" },
@@ -405,18 +328,6 @@ function M.setup()
       end,
       disable = false,
     }
-    use {
-      "ray-x/guihua.lua",
-      run = "cd lua/fzy && make",
-      disable = true,
-    }
-    use {
-      "doums/suit.nvim",
-      config = function()
-        require("suit").setup {}
-      end,
-      disable = true,
-    }
 
     -- Completion
     use {
@@ -497,10 +408,8 @@ function M.setup()
         "mason-lspconfig.nvim",
         "mason-tool-installer.nvim",
         "cmp-nvim-lsp",
-        "lua-dev.nvim",
         "vim-illuminate",
         "null-ls.nvim",
-        "schemastore.nvim",
         "typescript.nvim",
         "nvim-navic",
         "inlay-hints.nvim",
@@ -515,7 +424,6 @@ function M.setup()
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        "folke/lua-dev.nvim",
         "RRethy/vim-illuminate",
         "jose-elias-alvarez/null-ls.nvim",
         {
@@ -524,7 +432,6 @@ function M.setup()
             require("fidget").setup {}
           end,
         },
-        "b0o/schemastore.nvim",
         "jose-elias-alvarez/typescript.nvim",
         {
           "SmiteshP/nvim-navic",
@@ -538,14 +445,6 @@ function M.setup()
           config = function()
             require("inlay-hints").setup()
           end,
-        },
-        {
-          "zbirenbaum/neodim",
-          event = "LspAttach",
-          config = function()
-            require("config.neodim").setup()
-          end,
-          disable = true,
         },
       },
     }
@@ -655,25 +554,6 @@ function M.setup()
       end,
     }
 
-    -- Code folding
-    use {
-      "kevinhwang91/nvim-ufo",
-      opt = true,
-      -- event = { "BufReadPre" },
-      keys = { "zc", "zo", "zR", "zm" },
-      wants = { "promise-async" },
-      requires = "kevinhwang91/promise-async",
-      config = function()
-        require("ufo").setup {
-          provider_selector = function(bufnr, filetype)
-            return { "lsp", "treesitter", "indent" }
-          end,
-        }
-        vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-        vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-      end,
-      disable = true,
-    }
 
     -- Performance
     use { "dstein64/vim-startuptime", cmd = "StartupTime" }
@@ -684,16 +564,6 @@ function M.setup()
       end,
     }
 
-
-    -- Practice
-    use {
-      "antonk52/bad-practices.nvim",
-      event = "BufReadPre",
-      config = function()
-        require("bad_practices").setup()
-      end,
-      disable = true,
-    }
 
    
     -- Sidebar
