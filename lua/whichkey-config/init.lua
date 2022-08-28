@@ -58,7 +58,8 @@ local mappings = {
     a = { '<cmd>Lspsaga code_action<cr>', "Code Action" },
     e = { '<cmd>Lspsaga show_line_diagnostics<cr>', "Show Line Diagnostics" },
     n = { '<cmd>Lspsaga diagnostic_jump_next<cr>', "Go To Next Diagnostic" },
-    N = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', "Go To Previous Diagnostic" }
+    N = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', "Go To Previous Diagnostic" },
+    h = { '<cmd>lua vim.lsp.buf.document_highlight()<cr>', "Highlight References" }
   },
   z = {
     name = "Focus",
