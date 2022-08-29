@@ -54,7 +54,7 @@ function M.setup()
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       event = "BufWinEnter",
-      config = "require('bufferline-config')"
+      config = "require('bufferline-config').setup()"
     }
     use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", event = "BufWinEnter",
       config = "require('treesitter-config')" }
@@ -71,13 +71,14 @@ function M.setup()
     }
     use { 'windwp/nvim-ts-autotag', event = "InsertEnter", after = "nvim-treesitter" }
     -- use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" }
-    use { 'windwp/nvim-autopairs', config = "require('autopairs-config')", after = "nvim-cmp" }
+    use { 'windwp/nvim-autopairs', config = "require('autopairs-config').setup()", after = "nvim-cmp" }
     use { 'folke/which-key.nvim', event = "BufWinEnter", config = "require('whichkey-config')" }
     use {
       'nvim-telescope/telescope.nvim',
+      tag = "0.1.0",
       requires = { { 'nvim-lua/plenary.nvim' } },
       cmd = "Telescope",
-      config = "require('telescope-config')"
+      config = "require('telescope-config').setup()"
     }
     use { 'neovim/nvim-lspconfig', config = "require('lsp')" }
     use { 'hrsh7th/cmp-nvim-lsp' }
