@@ -1,4 +1,9 @@
-local saga = require('lspsaga')
+local M = {}
 
-saga.init_lsp_saga()
+function M.setup()
+  local saga = require('lspsaga')
 
+  saga.init_lsp_saga()
+end
+
+return M

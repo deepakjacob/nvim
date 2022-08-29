@@ -8,14 +8,14 @@ function M.setup()
   local conf = {
     profile = {
       enable = true,
-      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+      threshold = 0 -- the amount in ms that a plugins load time must be over for it to be included in the profile
     },
 
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
-      end,
-    },
+      end
+    }
   }
 
   -- Check if packer.nvim is installed
@@ -25,12 +25,7 @@ function M.setup()
     local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
       packer_bootstrap = fn.system {
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
+        "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path
       }
       vim.cmd [[packadd packer.nvim]]
     end
@@ -38,10 +33,11 @@ function M.setup()
     -- Run PackerCompile if there are changes in this file
     -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
     local packer_grp = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
-    vim.api.nvim_create_autocmd(
-      { "BufWritePost" },
-      { pattern = "init.lua", command = "source <afile> | PackerCompile", group = packer_grp }
-    )
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      pattern = "init.lua",
+      command = "source <afile> | PackerCompile",
+      group = packer_grp
+    })
   end
 
   -- Plugins
@@ -56,14 +52,22 @@ function M.setup()
       event = "BufWinEnter",
       config = "require('bufferline-config').setup()"
     }
-    use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", event = "BufWinEnter",
-      config = "require('treesitter-config')" }
-    use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true }, event = "BufWinEnter",
-      config = "require('lualine-config')" }
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ":TSUpdate",
+      event = "BufWinEnter",
+      config = "require('treesitter-config')"
+    }
+    use {
+      'hoob3rt/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+      event = "BufWinEnter",
+      config = "require('lualine-config')"
+    }
     use {
       'kyazdani42/nvim-tree.lua',
       requires = {
-        'kyazdani42/nvim-web-devicons', -- optional, for file icons
+        'kyazdani42/nvim-web-devicons' -- optional, for file icons
       },
       tag = 'nightly', -- optional, updated every week. (see issue #1193)
       cmd = "NvimTreeToggle",
@@ -71,7 +75,11 @@ function M.setup()
     }
     use { 'windwp/nvim-ts-autotag', event = "InsertEnter", after = "nvim-treesitter" }
     -- use { 'p00f/nvim-ts-rainbow', after = "nvim-treesitter" }
-    use { 'windwp/nvim-autopairs', config = "require('autopairs-config').setup()", after = "nvim-cmp" }
+    use {
+      'windwp/nvim-autopairs',
+      config = "require('autopairs-config').setup()",
+      after = "nvim-cmp"
+    }
     use { 'folke/which-key.nvim', event = "BufWinEnter", config = "require('whichkey-config')" }
     use {
       'nvim-telescope/telescope.nvim',
@@ -100,9 +108,20 @@ function M.setup()
       end
     }
     use { "akinsho/toggleterm.nvim", config = "require('toggleterm-config')" }
-    use { 'glepnir/lspsaga.nvim', branch = "main", config = "require('lspsaga-config')" }
+    use {
+      'glepnir/lspsaga.nvim',
+      branch = "main",
+      config = function()
+        require('lspsaga-config').setup()
+      end
+    }
     use { 'williamboman/nvim-lsp-installer' }
-    use { 'jose-elias-alvarez/null-ls.nvim', config = "require('null-ls-config')" }
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require('null-ls-config').setup()
+      end
+    }
 
     if packer_bootstrap then
       print "Neovim restart is required after installation!"
@@ -113,7 +132,6 @@ function M.setup()
   -- init and start packer
   packer_init()
   local packer = require "packer"
-
 
   -- performance
   pcall(require, "impatient")
