@@ -45,6 +45,13 @@ function M.setup()
 
     use 'wbthomason/packer.nvim'
     -- use { "folke/tokyonight.nvim", config = "vim.cmd('colorscheme tokyonight')" }
+    use {
+      'TimUntersberger/neogit',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require("neogit-config").setup()
+      end
+    }
     use { "rebelot/kanagawa.nvim", config = 'vim.cmd("colorscheme kanagawa")' }
     use {
       'akinsho/bufferline.nvim',
