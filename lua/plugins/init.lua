@@ -61,6 +61,13 @@ function M.setup()
         require('bufferline-config').setup()
       end
     }
+
+    use {
+      'numToStr/Comment.nvim',
+      config = function()
+        require('Comment').setup()
+      end
+    }
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ":TSUpdate",
